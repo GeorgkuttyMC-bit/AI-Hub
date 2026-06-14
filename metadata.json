@@ -1,0 +1,6 @@
+{
+  "name": "India AI and ML Job Board",
+  "description": "Find and filter Artificial Intelligence, Machine Learning and related jobs across major Indian tech hubs, categorized by location and work type (Remote, Office, Hybrid). Powered by Gemini live AI search.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
