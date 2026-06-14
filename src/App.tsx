@@ -29,7 +29,8 @@ import {
   Network,
   GraduationCap,
   Newspaper,
-  Copy
+  Copy,
+  UserCircle
 } from "lucide-react";
 
 import { motion, AnimatePresence } from "motion/react";
@@ -139,7 +140,7 @@ export default function App() {
   const [activeJob, setActiveJob] = useState<Job | null>(null);
   
   // Tab control inside the single view
-  const [activeTab, setActiveTab] = useState<"all" | "saved" | "ai-live" | "network" | "courses" | "news">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "saved" | "ai-live" | "network" | "courses" | "news" | "developer">("all");
   const [copiedNewsId, setCopiedNewsId] = useState<string | null>(null);
 
   const handleCopyNews = (id: string, text: string) => {
@@ -421,6 +422,18 @@ export default function App() {
               <Newspaper className="w-3.5 h-3.5 text-indigo-500" />
               <span>News & Updates</span>
             </button>
+            <button
+              id="tab-btn-developer"
+              onClick={() => setActiveTab("developer")}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer border ${
+                activeTab === "developer"
+                  ? "bg-slate-900 border-slate-900 text-white shadow-sm"
+                  : "bg-white border-slate-200 text-slate-700 hover:text-indigo-650 hover:border-indigo-200"
+              }`}
+            >
+              <UserCircle className={`w-3.5 h-3.5 ${activeTab === "developer" ? "text-indigo-300" : "text-slate-500"}`} />
+              <span>About Developer</span>
+            </button>
           </div>
 
         </div>
@@ -452,7 +465,7 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {activeTab !== "network" && activeTab !== "courses" && activeTab !== "news" ? (
+        {activeTab !== "network" && activeTab !== "courses" && activeTab !== "news" && activeTab !== "developer" ? (
           <>
             {/* Live Search Panel */}
             <section id="search-controls-card" className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
@@ -1144,20 +1157,171 @@ export default function App() {
               ))}
             </div>
           </section>
+        ) : activeTab === "developer" ? (
+          <section id="developer-view" className="max-w-4xl mx-auto w-full">
+            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+              <div className="bg-slate-900 border-b border-slate-800 p-8 text-center sm:text-left sm:flex sm:items-center sm:gap-6">
+                <div className="w-24 h-24 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-display text-3xl font-bold border-4 border-slate-800 mx-auto sm:mx-0 shrink-0">
+                  GC
+                </div>
+                <div className="mt-4 sm:mt-0">
+                  <h2 className="text-2xl font-bold text-white tracking-tight">Georgekutty Mannathredath Cherian</h2>
+                  <p className="text-indigo-300 font-mono text-sm mt-1 mb-3">Senior Graphic Design & AI Specialist</p>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-slate-400 text-xs font-mono">
+                    <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> Kochi, India</span>
+                    <a href="https://www.linkedin.com/in/georgekutty-m-c-16886193/" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-white transition-colors"><Network className="w-3.5 h-3.5" /> LinkedIn</a>
+                    <a href="https://www.behance.net/Georgecreativelab" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-white transition-colors"><Globe2 className="w-3.5 h-3.5" /> Behance Portfolio</a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="md:col-span-2 space-y-8">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono mb-3 border-b border-slate-100 pb-2">About Developer</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      Senior graphic design specialist with over 10 years of experience managing full-cycle design projects.
+                      Certified in advanced Adobe AI Software (Firefly, Adobe Aero). Extensive expertise leading design teams
+                      and producing innovative visual data stories, user interfaces, business presentations, and high-quality marketing collateral.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono mb-4 border-b border-slate-100 pb-2">Professional Experience</h3>
+                    <div className="space-y-5">
+                      <div className="relative pl-4 border-l-2 border-slate-200">
+                        <div className="absolute w-2.5 h-2.5 bg-indigo-500 rounded-full -left-[6px] top-1.5 border-2 border-white"></div>
+                        <h4 className="font-bold text-slate-900 text-sm">Senior Analyst 1 (Graphic Designer)</h4>
+                        <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                          <span className="font-semibold text-slate-700">Hubbell Incorporated</span> &bull; <span>Oct 2021 &ndash; Present</span>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Overseeing all design projects from conception to delivery. Translating concepts into compelling digital and print products while ensuring brand consistency and mentoring junior designers.
+                        </p>
+                      </div>
+
+                      <div className="relative pl-4 border-l-2 border-slate-200">
+                        <div className="absolute w-2.5 h-2.5 bg-slate-300 rounded-full -left-[6px] top-1.5 border-2 border-white"></div>
+                        <h4 className="font-bold text-slate-900 text-sm">Infographic Designer</h4>
+                        <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                          <span className="font-semibold text-slate-700">Sprinklr</span> &bull; <span>Mar 2021 &ndash; Oct 2021</span>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Designed complex infographic narratives, visualizing data innovatively for global clients using Adobe Illustrator and streamlining the artistic workflow.
+                        </p>
+                      </div>
+
+                      <div className="relative pl-4 border-l-2 border-slate-200">
+                        <div className="absolute w-2.5 h-2.5 bg-slate-300 rounded-full -left-[6px] top-1.5 border-2 border-white"></div>
+                        <h4 className="font-bold text-slate-900 text-sm">Senior Graphic Designer</h4>
+                        <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                          <span className="font-semibold text-slate-700">Provise Consulting</span> &bull; <span>Dec 2018 &ndash; Mar 2021</span>
+                        </div>
+                      </div>
+
+                      <div className="relative pl-4 border-l-2 border-slate-200">
+                        <div className="absolute w-2.5 h-2.5 bg-slate-300 rounded-full -left-[6px] top-1.5 border-2 border-white"></div>
+                        <h4 className="font-bold text-slate-900 text-sm">Senior Documentation Specialist</h4>
+                        <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+                          <span className="font-semibold text-slate-700">Williams Lea</span> &bull; <span>May 2013 &ndash; Jan 2018</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono mb-3 border-b border-slate-100 pb-2">Certifications</h3>
+                    <ul className="space-y-2.5">
+                      <li className="flex gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 mt-0.5 shrink-0" />
+                        <div>
+                          <strong className="block text-slate-800">Generative AI in the Classroom</strong>
+                          <span className="text-slate-500 font-mono text-[10px]">Adobe</span>
+                        </div>
+                      </li>
+                      <li className="flex gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 mt-0.5 shrink-0" />
+                        <div>
+                          <strong className="block text-slate-800">Augment Reality with Students</strong>
+                          <span className="text-slate-500 font-mono text-[10px]">Adobe Aero</span>
+                        </div>
+                      </li>
+                      <li className="flex gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 mt-0.5 shrink-0" />
+                        <div>
+                          <strong className="block text-slate-800">AI Essentials: Comprehensive Intro</strong>
+                          <span className="text-slate-500 font-mono text-[10px]">AppliedAI Institute Europe</span>
+                        </div>
+                      </li>
+                      <li className="flex gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
+                        <div>
+                          <strong className="block text-slate-800">Content Creator & Campaign Pro</strong>
+                          <span className="text-slate-500 font-mono text-[10px]">Sprinklr</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-mono mb-3 border-b border-slate-100 pb-2">Core Skills</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-semibold">GenAI Tooling</span>
+                      <span className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-semibold">Adobe Firefly</span>
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">UI / UX Design</span>
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">Data Visualization</span>
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">AfterEffects</span>
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">Infographics</span>
+                      <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-xs font-medium">Team Leadership</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
         ) : null}
 
       </main>
 
       {/* FOOTER */}
-      <footer id="main-footer" className="bg-slate-900 border-t border-slate-800 text-slate-400 py-8 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono">
-          <p>
-            &copy; 2026 India AI and ML Job Board Board. All rights reserved.
-          </p>
-          <div className="flex gap-4">
-            <span className="text-slate-500 font-sans">
-              Maintained under AI Studio Workspace Container
-            </span>
+      <footer id="main-footer" className="bg-slate-900 border-t border-slate-800 text-slate-400 mt-12 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-8 border-b border-slate-800">
+            <div>
+              <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+                <UserCircle className="w-4 h-4 text-indigo-400" /> 
+                About the Developer
+              </h4>
+              <p className="text-xs leading-relaxed text-slate-400 max-w-sm mb-4">
+                <strong>Georgekutty Mannathredath Cherian</strong> is a Senior Graphic Design & AI Specialist from Kochi, India with over 10 years of experience. Certified in Generative AI tools like Adobe Firefly and AppliedAI.
+              </p>
+              <div className="flex items-center gap-3">
+                <a href="https://www.linkedin.com/in/georgekutty-m-c-16886193/" target="_blank" rel="noreferrer" className="text-indigo-400 hover:text-white transition-colors text-xs font-mono flex items-center gap-1"><Network className="w-3 h-3"/> LinkedIn</a>
+                <a href="https://www.behance.net/Georgecreativelab" target="_blank" rel="noreferrer" className="text-indigo-400 hover:text-white transition-colors text-xs font-mono flex items-center gap-1"><Globe2 className="w-3 h-3"/> Behance</a>
+              </div>
+            </div>
+            
+            <div className="flex md:justify-end items-end">
+              <div className="text-xs font-mono text-slate-500 text-left md:text-right">
+                <p className="mb-1">Core Skills:</p>
+                <p className="text-indigo-300">GenAI Tooling &bull; UI/UX &bull; Data Visualization &bull; Adobe Firefly</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono">
+            <p className="text-slate-500">
+              &copy; 2026 India AI and ML Job Board Board. All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <span className="text-slate-600 font-sans">
+                Maintained under AI Studio Workspace Container
+              </span>
+            </div>
           </div>
         </div>
       </footer>
